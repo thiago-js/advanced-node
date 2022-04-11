@@ -1,0 +1,24 @@
+{
+  "name": "advanced-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "start": "node dist/main/api"
+  },
+  "author": "thiago jose de almeida simao",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^17.0.23",
+    "typescript": "^4.6.3"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.2",
+    "rimraf": "^3.0.2"
+  }
+}
