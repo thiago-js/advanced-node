@@ -2,7 +2,7 @@ import { LoadFacebookUserApi } from '@/data/contracts/api'
 import { FacebookAuthentication } from '@/domain/features'
 import { AuthenticationError } from '@/domain/errors'
 import { LoadUserAccountRepository, SaveFacebookAccountRepository } from '@/data/contracts/api/repos'
-import { FacebookAccount } from '@/domain/models'
+import { AccessToken, FacebookAccount } from '@/domain/models'
 import { TokenGeranerator } from '@/data/contracts/crypto'
 
 export class FacebookAuthenticationService {
@@ -13,6 +13,7 @@ export class FacebookAuthenticationService {
   ) {}
 
   async perform (Params: FacebookAuthentication.Params): Promise<AuthenticationError> {
+    const expirationInMs = AccessToken.expirationInMs
     const fbData = await this.facebookApi.loadUser(Params)
 
     if (fbData !== undefined) {
@@ -20,7 +21,7 @@ export class FacebookAuthenticationService {
       const facebookAccount = new FacebookAccount(fbData, accountData)
 
       const { id } = await this.userAccountRepo.saveWithFacebook(facebookAccount)
-      await this.crypto.generateToken({ key: id })
+      await this.crypto.generateToken({ key: id, expirationInMs })
     }
 
     return new AuthenticationError()
