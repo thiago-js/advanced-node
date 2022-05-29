@@ -9,7 +9,7 @@
 
 > ## Debug Token
 
--   Request to https://graph.facebook.com/uauth/access_token
+-   Request to https://graph.facebook.com/debug_token
 -   Verb Get
 -   Params: access_token (server), input_token (client)
 -   Results: { data: { user_id } }
@@ -20,3 +20,4 @@
 -   Verb Get
 -   Params: fields (id, name email), access_token (client)
 -   Results: { id, name , email }
+
