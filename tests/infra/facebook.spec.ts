@@ -10,7 +10,7 @@ describe('FacebookAPI', () => {
 
   beforeAll(() => {
     clientId = 'any_client_id'
-    clientSecret = 'any_client_id'
+    clientSecret = 'any_secret_id'
     httpClient = mock<HttpGetClient>()
   })
 
@@ -39,6 +39,15 @@ describe('FacebookAPI', () => {
     })
   })
 
+  /*
+  "params": {
+      "access_token": "any_app_token",
+      "input_token": "any_client_token",
+    },
+    "url": "https://graph.facebook.com/debug_token"
+  }
+  */
+
   it('should get debug', async () => {
     await sut.loadUser({ token: 'any_client_token' })
 
@@ -53,7 +62,7 @@ describe('FacebookAPI', () => {
 
   it('should get user info', async () => {
     const token = 'any_client_token'
-    await sut.loadUser({ token })
+    await sut.loadUser({ token: token })
 
     expect(httpClient.get).toHaveBeenCalledWith({
       url: 'https://graph.facebook.com/any_user_id',
